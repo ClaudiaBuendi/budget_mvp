@@ -1,0 +1,20 @@
+.button-container {
+  display: flex;
+  justify-content: space-evenly; /* Evenly space the buttons */
+  align-items: center; /* Vertically center the buttons */
+  padding: 10px; /* Add padding around the container */
+  gap: 10px; /* Optional: space between each button */
+}
+
+.button {
+  padding: 10px 20px; /* Add padding inside each button */
+  font-size: 16px; /* Set the font size for the buttons */
+  border: 1px solid #ccc; /* Add a border around the buttons */
+  background-color: #f0f0f0; /* Background color */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.button:hover {
+  background-color: #ddd; /* Change background on hover */
+}

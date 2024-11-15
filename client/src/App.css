@@ -38,5 +38,124 @@
 }
 
 .read-the-docs {
+  color: #18e2d1;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-evenly; /* Evenly space the buttons */
+  align-items: center; /* Vertically center the buttons */
+  padding: 10px; /* Add padding around the container */
+  gap: 10px; /* Optional: space between each button */
+}
+
+.button {
+  padding: 10px 20px; /* Add padding inside each button */
+  font-size: 16px; /* Set the font size for the buttons */
+  border: 1px solid #7b10df; /* Add a border around the buttons */
+  background-color: #8da2a8; /* Background color */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.button:hover {
+  background-color: #ddd; /* Change background on hover */
+}
+/* General Page Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  background-color: #f8f9fa; /* Light gray background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Main Container for Transactions */
+.container {
+  max-width: 800px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff; /* White background */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border-radius: 10px;
+}
+
+/* Header Styles */
+.container h1 {
+  text-align: center;
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 10px;
+}
+
+/* Transaction List Styles */
+.container > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Individual Transaction Card */
+.container > div > div {
+  padding: 15px;
+  background-color: #f4f6f8; /* Slightly off-white for contrast */
+  border-radius: 8px;
+  border: 1px solid #ddd; /* Light gray border */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover Effect on Transaction Card */
+.container > div > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Add a shadow on hover */
+}
+
+/* Transaction Title (Description) */
+.container h2 {
+  font-size: 1.4rem;
+  color: #4caf50; /* Green color for titles */
+  margin-bottom: 8px;
+}
+
+/* Transaction Date */
+.container p:nth-of-type(1) {
+  font-size: 0.9rem;
+  color: #777; /* Light gray for dates */
+  margin-bottom: 5px;
+}
+
+/* Transaction Amount */
+.container p:nth-of-type(2) {
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .container h1 {
+    font-size: 1.8rem;
+  }
+
+  .container h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Footer Styles (Optional) */
+footer {
+  text-align: center;
   color: #888;
+  font-size: 0.9rem;
+  margin-top: 20px;
 }

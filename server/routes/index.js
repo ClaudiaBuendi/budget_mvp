@@ -8,6 +8,7 @@ const {
   getCategories,
   createCategories,
 } = require("../controllers/categoriesController");
+const { registerUser, loginUser } = require("../controllers/userController");
 
 // Define your endpoint. This routers job is to get all transactions
 router.get("/transactions", getTransactions);
@@ -18,4 +19,18 @@ router.post("/new-transactions", createTransactions);
 router.get("/categories", getCategories);
 
 router.post("/new-categories", createCategories);
+
+//USER ROUTES
+// Register -> create new user
+router.post("/register", registerUser);
+
+// login -> get user info
+router.post("/login", loginUser);
+
+//LATER:
+//delete user
+// get all users
+// get user by id
+// update user info
+
 module.exports = router;

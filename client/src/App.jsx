@@ -10,6 +10,7 @@ import "./styles.css";
 
 export default function App() {
   let [transactions, setTransactions] = useState([]);
+  const [categories, setCategories] = useState([]); // <-- Add this line here
 
   const fetchData = async () => {
     try {
@@ -24,15 +25,25 @@ export default function App() {
     }
   };
 
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get("/api/categories");
+      setCategories(response.data); // assuming the response contains an array of categories
+    } catch (error) {
+      console.error("Failed to fetch categories", error);
+    }
+  };
+
   useEffect(() => {
-    fetchData();
+    fetchData(); // Fetch transactions when component mounts
+    fetchCategories(); // Fetch categories when component mounts
   }, []);
 
   // function to add a new transaction
   const addTransaction = async (transaction) => {
+    console.log("Add transaction app.jsx", transaction);
     try {
       // communicate with db: add task
-      // axios.method(url, data(opt), options(say type of data))
       let response = await axios.post("/api/new-transactions", transaction, {
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +79,12 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route
           path="/budget-summary"
-          element={<BudgetSummary transactions={transactions} />}
+          element={
+            <BudgetSummary
+              transactions={transactions}
+              categories={categories} // <-- Pass categories prop to BudgetSummary
+            />
+          }
         />
         <Route
           path="/new-transaction"

@@ -36,13 +36,26 @@ const getTransactionsByCustomerID = async (req, res) => {
 };
 
 const createTransactions = async (req, res) => {
-  //destructuring these 6 keys from req.body
+  // Destructuring the request body
   const { category_id, description, type, total, date, user } = req.body;
-  await pool.query(
-    //creating new purchases with these 6 keys into the database
-    `INSERT INTO transactions (category_id, description, type, total, date, user) VALUES (${category_id}, '${description}', '${type}', ${total}, '${date}', '${user}');`
-  ); //respond and connect & successfully created a new transaction
-  res.status(201).send({ message: "Purchase added" });
+
+  // Ensure the values are sanitized and validated
+  if (!category_id || !description || !type || !total || !date || !user) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  try {
+    // Using parameterized queries to prevent SQL injection
+    await pool.query(
+      `INSERT INTO transactions (category_id, description, type, total, date, user) 
+       VALUES (?, ?, ?, ?, ?, ?)`,
+      [category_id, description, type, total, date, user]
+    );
+    res.status(201).send({ message: "Transaction added successfully" });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: "Failed to create transaction" });
+  }
 };
 
 module.exports = {

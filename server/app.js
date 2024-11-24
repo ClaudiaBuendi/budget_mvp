@@ -1,25 +1,21 @@
 const cors = require("cors");
 const express = require("express");
 const app = express();
-// const port = 4000;
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var indexRouter = require("./routes/index");
+const path = require("path");
+const cookieParser = require("cookie-parser");
 
+// Import routers
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
+
+// Middleware
 app.use(cors());
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/api", indexRouter);
-// Your routes here
-// app.get("/api/transactions", (req, res) => {
-//   res.json({ transactions: [] }); // Sample response
-// });
+// Routes
+app.use("/api", indexRouter); // General routes
+app.use("/api/users", usersRouter); // User-related routes
 
-// app.listen(port, () => {
-//   console.log(`Server is running on http://localhost:${4000}`);
-// });
 module.exports = app;

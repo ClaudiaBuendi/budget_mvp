@@ -61,3 +61,29 @@
   margin-top: 20px;
   font-weight: bold;
 }
+
+.balance {
+  color: #007bff; /* Blue for the remaining budget */
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+/* category breakdown
+.category-breakdown {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.category-breakdown h2 {
+  color: #555;
+}
+
+.category-breakdown ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.category-breakdown li {
+  margin: 5px 0;
+  font-size: 1.1rem;
+} */

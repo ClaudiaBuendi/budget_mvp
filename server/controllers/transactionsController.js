@@ -47,9 +47,9 @@ const createTransactions = async (req, res) => {
   try {
     // Using parameterized queries to prevent SQL injection
     await pool.query(
-      `INSERT INTO transactions (category_id, description, type, total, date, user) 
-       VALUES (?, ?, ?, ?, ?, ?)`,
-      [category_id, description, type, total, date, user]
+      `INSERT INTO transactions (category_id, description, type, total, date, user, user_id) 
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [category_id, description, type, total, date, user, 1]
     );
     res.status(201).send({ message: "Transaction added successfully" });
   } catch (error) {

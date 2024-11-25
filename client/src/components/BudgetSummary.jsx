@@ -59,9 +59,9 @@ export default function BudgetSummary({ transactions, categories }) {
           <h2>Expenses by Category</h2>
           <ul>
             {Object.entries(categoryTotals).map(([category, total]) => (
-              <li key={category}>
+              <div key={category}>
                 {category}: ${total}
-              </li>
+              </div>
             ))}
           </ul>
         </div>

@@ -1,13 +1,20 @@
 // Import database pool from config folder
 const pool = require("../config/db");
+var jwt = require("jsonwebtoken");
+require("dotenv").config();
+var bcrypt = require("bcrypt");
+const saltRounds = 10;
+
+const supersecret = process.env.SUPER_SECRET;
 
 // AUTHENTICATION & ACCOUNT MANAGEMENT
 const registerUser = async (req, res) => {
   try {
     const { username, password } = req.body;
+    const hash = await bcrypt.hash(password, saltRounds);
     await pool.query("INSERT INTO users (username, password) VALUES (?, ?)", [
       username,
-      password,
+      hash,
     ]);
     res.status(201).send({ message: "User registered successfully" });
   } catch (error) {
@@ -16,30 +23,39 @@ const registerUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
+  const { username, password } = req.body;
+
   try {
-    const { username, password } = req.body;
-    const [user] = await pool.query(
-      "SELECT * FROM users WHERE username = ? AND password = ?",
-      [username, password]
+    const [results] = await pool.query(
+      `SELECT * FROM users WHERE username = "${username}"`
     );
-    if (user.length > 0) {
-      res.status(200).send({ message: "Login successful", user: user[0] });
+
+    const user = results[0];
+    if (user) {
+      const user_id = user.id;
+
+      const correctPassword = await bcrypt.compare(password, user.password);
+
+      if (!correctPassword) throw new Error("Incorrect password");
+
+      // { user_id } is the same as { user_id: user_id }
+      let token = jwt.sign({ user_id }, supersecret);
+
+      res.send({ message: "Login successful, here is your token", token });
     } else {
-      res.status(401).send({ error: "Invalid credentials" });
+      throw new Error("User does not exist");
     }
-  } catch (error) {
-    res.status(500).send({ error: "Error logging in" });
+  } catch (err) {
+    res.status(400).send({ message: err.message });
   }
 };
 
 // OPTIONAL: GET USERS
 const getUsers = async (req, res) => {
-  try {
-    const [result] = await pool.query("SELECT * FROM users;");
-    res.status(200).send(result);
-  } catch (error) {
-    res.status(500).send({ error: "Error fetching users" });
-  }
+  const [results] = await pool.query(
+    `SELECT username FROM users WHERE id = ${req.user_id}`
+  );
+  res.send(results[0]);
 };
 
 // EXPORT FUNCTIONS

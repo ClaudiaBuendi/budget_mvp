@@ -7,6 +7,8 @@ import NewTransaction from "./components/newTransaction";
 import TransactionList from "./components/TransactionList";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import "./styles.css";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 export default function App() {
   let [transactions, setTransactions] = useState([]);
@@ -73,6 +75,14 @@ export default function App() {
         <Link to="/transaction-list" className="button">
           Transaction List
         </Link>
+        <Link to="/login" className="button">
+          Login
+        </Link>{" "}
+        {/* Add login link */}
+        <Link to="/register" className="button">
+          Register
+        </Link>{" "}
+        {/* Add Register Link */}
       </div>
       {/* Defining Routes */}
       <Routes>
@@ -94,6 +104,9 @@ export default function App() {
           path="/transaction-list"
           element={<TransactionList transactions={transactions} />}
         />
+        <Route path="/login" element={<Login />} /> {/* Add login route */}
+        <Route path="/register" element={<Register />} />{" "}
+        {/* Add Register Route */}
       </Routes>
     </>
   );

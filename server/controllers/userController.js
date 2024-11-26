@@ -27,7 +27,8 @@ const loginUser = async (req, res) => {
 
   try {
     const [results] = await pool.query(
-      `SELECT * FROM users WHERE username = "${username}"`
+      `SELECT * FROM users WHERE username = ?`,
+      [username]
     );
 
     const user = results[0];
@@ -46,7 +47,10 @@ const loginUser = async (req, res) => {
       throw new Error("User does not exist");
     }
   } catch (err) {
-    res.status(400).send({ message: err.message });
+    console.error("Login error:", err); // Log the error in the backend console
+    res
+      .status(400)
+      .send({ message: "Login failed. Please check your credentials." });
   }
 };
 

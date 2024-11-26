@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CategoryComponent from "./Categories";
 
 export default function NewTransaction({ onAddTransaction }) {
-  //state (formData) manages input values for each field
+  // state for form data
   const [formData, setFormData] = useState({
     category_id: "",
     description: "",
@@ -12,22 +12,29 @@ export default function NewTransaction({ onAddTransaction }) {
     user: "",
   });
 
-  // handleChange function updates formData based on user input
+  // state for success message
+  const [message, setMessage] = useState("");
+
+  // handle form input changes
   const handleChange = (e) => {
-    //Destructuring e.target into name and value allows this function to dynamically update each form field based on the name attribute
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // handle category change
   const handleCategoryChange = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-  // function to handle submit
+
+  // handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData);
+
     // Call onAddTransaction and pass the form data
     onAddTransaction({ ...formData, total: parseFloat(formData.total) });
+
+    // Show success message
+    setMessage("Transaction added successfully!");
 
     // Reset form fields after submission
     setFormData({
@@ -38,6 +45,11 @@ export default function NewTransaction({ onAddTransaction }) {
       date: "",
       user: "",
     });
+
+    // Clear message after 3 seconds (optional)
+    setTimeout(() => {
+      setMessage("");
+    }, 3000);
   };
 
   return (
@@ -58,37 +70,17 @@ export default function NewTransaction({ onAddTransaction }) {
           value={formData.description}
           onChange={handleChange}
         />
-        {/* Category ID input */}
         <input
           type="text"
           name="category_id"
           placeholder="Category"
           value={formData.category_id}
-          onChange={handleChange} // Add the onChange handler here
+          onChange={handleChange}
         />
-
-        {/* Type select dropdown */}
-        <select
-          name="type"
-          value={formData.type}
-          onChange={handleChange} // Ensure this is outside the options
-        >
-          <option value="Utilities">Utilities</option>
-          <option value="Income">Income</option>
-          <option value="Transport">Transport</option>
-          <option value="Groceries">Groceries</option>
-          <option value="Eating Out">Eating Out</option>
-          <option value="Entertainment">Entertainment</option>
-          <option value="Insurance">Insurance</option>
-          <option value="Rent/Mortgage">Rent/Mortgage</option>
+        <select name="type" value={formData.type} onChange={handleChange}>
+          <option value="expense">Expense</option>
+          <option value="income">Income</option>
         </select>
-        {/* <input
-        type="text"
-        name="category_id"
-        placeholder="Category"
-        value={formData.category_id}
-        onChange={handleChange}
-      /> */}
         <input
           type="text"
           name="user"
@@ -103,12 +95,11 @@ export default function NewTransaction({ onAddTransaction }) {
           value={formData.total}
           onChange={handleChange}
         />
-        <select name="type" value={formData.type} onChange={handleChange}>
-          <option value="expense">Expense</option>
-          <option value="income">Income</option>
-        </select>
         <button type="submit">Add Transaction</button>
       </form>
+
+      {/* Show success message if transaction is added */}
+      {message && <p style={{ color: "green" }}>{message}</p>}
     </div>
   );
 }

@@ -30,7 +30,7 @@ body {
 
 /* Header Styles */
 header {
-  background-color: #4caf50; /* Green background */
+  background-color: #bbbbbb; /* Green background */
   color: white;
   width: 100%;
   text-align: center;
@@ -53,6 +53,36 @@ form select {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
+  color: #333; /* Set text color inside the input fields */
+  background-color: #f9f9f9; /* Optional: Set a background color */
+}
+
+form input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333; /* Text color inside the input fields */
+  background-color: #f9f9f9; /* Optional: Background color */
+}
+
+form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333; /* Text color inside the input fields */
+  background-color: #f9f9f9; /* Optional: Background color */
+}
+
+form input[type="date"] {
+  font-size: 1rem;
+  color: #000000; /* Text color inside the input fields */
+  background-color: #feb070; /* Optional: Background color */
 }
 
 /* Form Button */

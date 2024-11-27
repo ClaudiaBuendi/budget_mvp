@@ -8,7 +8,7 @@ export default function NewTransaction({ onAddTransaction }) {
     type: "expense",
     total: "",
     date: "",
-    // user: "",
+    user: "",
   });
   const [message, setMessage] = useState("");
 
@@ -76,13 +76,13 @@ export default function NewTransaction({ onAddTransaction }) {
           <option value="expense">Expense</option>
           <option value="income">Income</option>
         </select>
-        {/* <input
+        <input
           type="text"
           name="user"
           placeholder="Username"
           value={formData.user}
           onChange={handleChange}
-        /> */}
+        />
         <button type="submit">Add Transaction</button>
       </form>
 

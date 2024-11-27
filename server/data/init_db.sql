@@ -1,4 +1,3 @@
-
 -- (Re)create the tables
 
 -- clearing the tables if they already exist
@@ -32,17 +31,16 @@ CREATE TABLE `Transactions`(
     FOREIGN KEY (`user_id`) REFERENCES `Users`(`id`) ON DELETE CASCADE
 );
 
-
-
+-- Insert initial categories
 INSERT INTO categories (name, budget) VALUES ('Food', 500);
 INSERT INTO categories (name, budget) VALUES ('Bills', 1000);
 INSERT INTO categories (name, budget) VALUES ('Utilities', 1000);
 INSERT INTO categories (name, budget) VALUES ('Transport', 1000);
--- INSERT INTO categories (name, budget) VALUES ('Income', 1000);
--- INSERT INTO categories (name, budget) VALUES ('Eating out', 1000);
--- INSERT INTO categories (name, budget) VALUES ('Entertaiment', 1000);
--- INSERT INTO categories (name, budget) VALUES ('Insurance', 1000);
--- INSERT INTO categories (name, budget) VALUES ('Rent', 1000);
+INSERT INTO categories (name, budget) VALUES ('Income', 1000);
+INSERT INTO categories (name, budget) VALUES ('Eating out', 1000);
+INSERT INTO categories (name, budget) VALUES ('Entertainment', 1000);
+INSERT INTO categories (name, budget) VALUES ('Insurance', 1000);
+INSERT INTO categories (name, budget) VALUES ('Rent', 1000);
 
 -- SELECT * FROM Transactions;
 -- --get all transactions by category id

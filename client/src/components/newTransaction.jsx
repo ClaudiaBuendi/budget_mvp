@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import CategoryComponent from "./Categories";
 
 export default function NewTransaction({ onAddTransaction }) {
-  // state for form data
   const [formData, setFormData] = useState({
     category_id: "",
     description: "",
@@ -11,22 +10,20 @@ export default function NewTransaction({ onAddTransaction }) {
     date: "",
     user: "",
   });
-
-  // state for success message
   const [message, setMessage] = useState("");
 
-  // handle form input changes
+  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // handle category change
+  // Handle category change
   const handleCategoryChange = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // handle form submission
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -45,11 +42,6 @@ export default function NewTransaction({ onAddTransaction }) {
       date: "",
       user: "",
     });
-
-    // Clear message after 3 seconds (optional)
-    setTimeout(() => {
-      setMessage("");
-    }, 3000);
   };
 
   return (
@@ -71,10 +63,10 @@ export default function NewTransaction({ onAddTransaction }) {
           onChange={handleChange}
         />
         <input
-          type="text"
-          name="category_id"
-          placeholder="Category"
-          value={formData.category_id}
+          type="number"
+          name="total"
+          placeholder="Total"
+          value={formData.total}
           onChange={handleChange}
         />
         <select name="type" value={formData.type} onChange={handleChange}>
@@ -84,21 +76,13 @@ export default function NewTransaction({ onAddTransaction }) {
         <input
           type="text"
           name="user"
-          placeholder="username"
+          placeholder="Username"
           value={formData.user}
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          name="total"
-          placeholder="total"
-          value={formData.total}
           onChange={handleChange}
         />
         <button type="submit">Add Transaction</button>
       </form>
 
-      {/* Show success message if transaction is added */}
       {message && <p style={{ color: "green" }}>{message}</p>}
     </div>
   );

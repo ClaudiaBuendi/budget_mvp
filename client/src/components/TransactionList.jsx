@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 export default function Transactions({ transactions }) {
   return (
     <div className="container">
@@ -10,7 +8,8 @@ export default function Transactions({ transactions }) {
             <h2>
               {transaction.description} - {transaction.type}
             </h2>
-            <p>{transaction.date.slice(0, -14)}</p>
+            <p>{transaction.date.slice(0, 10)}</p>{" "}
+            {/* Sliced to show only the date */}
             <p>${transaction.total || transaction.amount}</p>
           </div>
         ))}

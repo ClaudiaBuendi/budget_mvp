@@ -82,25 +82,41 @@ export default function App() {
       {/* Define Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* inserting here the conditional?? */}
 
-        <Route
-          path="/budget-summary"
-          element={
-            <BudgetSummary
-              transactions={transactions}
-              categories={categories}
+        {/* Conditionally render routes based on loggedIn */}
+        {loggedIn ? (
+          <>
+            <Route
+              path="/budget-summary"
+              element={
+                <BudgetSummary
+                  transactions={transactions}
+                  categories={categories}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="/new-transaction"
-          element={<NewTransaction onAddTransaction={addTransaction} />}
-        />
-        <Route
-          path="/transaction-list"
-          element={<TransactionList transactions={transactions} />}
-        />
+            <Route
+              path="/new-transaction"
+              element={<NewTransaction onAddTransaction={addTransaction} />}
+            />
+            <Route
+              path="/transaction-list"
+              element={<TransactionList transactions={transactions} />}
+            />
+          </>
+        ) : (
+          // Optional fallback route or redirect
+          <Route
+            path="*"
+            element={
+              <p>
+                Please <Link to="/login">log in</Link> to access this page.
+              </p>
+            }
+          />
+        )}
+
+        {/* Always accessible routes */}
         <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
         <Route path="/register" element={<Register />} />
       </Routes>

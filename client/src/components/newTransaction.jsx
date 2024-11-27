@@ -8,7 +8,7 @@ export default function NewTransaction({ onAddTransaction }) {
     type: "expense",
     total: "",
     date: "",
-    user: "",
+    // user: "",
   });
   const [message, setMessage] = useState("");
 
@@ -46,8 +46,10 @@ export default function NewTransaction({ onAddTransaction }) {
 
   return (
     <div>
-      <h1>New Transaction</h1>
-      <CategoryComponent onChange={handleCategoryChange} />
+      <div className="header-banner">
+        <h1 className="h1">New Transaction</h1>
+      </div>
+
       <form onSubmit={handleSubmit}>
         <input
           type="date"
@@ -62,6 +64,7 @@ export default function NewTransaction({ onAddTransaction }) {
           value={formData.description}
           onChange={handleChange}
         />
+        <CategoryComponent onChange={handleCategoryChange} />
         <input
           type="number"
           name="total"
@@ -73,13 +76,13 @@ export default function NewTransaction({ onAddTransaction }) {
           <option value="expense">Expense</option>
           <option value="income">Income</option>
         </select>
-        <input
+        {/* <input
           type="text"
           name="user"
           placeholder="Username"
           value={formData.user}
           onChange={handleChange}
-        />
+        /> */}
         <button type="submit">Add Transaction</button>
       </form>
 

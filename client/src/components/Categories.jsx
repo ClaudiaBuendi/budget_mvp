@@ -24,7 +24,7 @@ export default function CategoryComponent({ onChange }) {
   };
 
   return (
-    <div>
+    <div type="category_id">
       <select name="category_id" onChange={handleCategoryChange}>
         <option disabled>Select</option>
         {categories.map((category) => (

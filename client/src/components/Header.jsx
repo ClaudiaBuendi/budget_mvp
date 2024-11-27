@@ -25,14 +25,15 @@ export default function Header({ loggedIn, setLoggedIn }) {
     <header>
       <nav>
         <ul>
-          <li>Welcome to Budget Tracker</li>
-          {loggedIn && <li>You are logged!</li>} {/* Show user greeting */}
+          <p> </p>
+          {loggedIn && <p>Welcome to Budget Tracker!</p>}{" "}
+          {/* Show user greeting */}
           {loggedIn ? (
-            <li>
+            <p>
               <button onClick={handleLogout}>Logout</button>
-            </li>
+            </p>
           ) : (
-            <li>?</li>
+            <p> </p>
           )}
         </ul>
       </nav>

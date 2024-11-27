@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -19,7 +19,7 @@ const Login = () => {
 
       // Store the token in localStorage
       localStorage.setItem("token", response.data.token);
-
+      setLoggedIn(true);
       // Navigate to the home page or dashboard
       navigate("/");
     } catch (err) {

@@ -14,6 +14,7 @@ import Header from "./components/Header"; // Import Header component
 export default function App() {
   let [transactions, setTransactions] = useState([]);
   const [categories, setCategories] = useState([]); // <-- Add this line here
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -54,7 +55,7 @@ export default function App() {
   return (
     <>
       {/* Add the Header above the navigation links */}
-      <Header />
+      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
 
       {/* Button container with className */}
       <div className="button-container">
@@ -81,6 +82,8 @@ export default function App() {
       {/* Define Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
+        {/* inserting here the conditional?? */}
+
         <Route
           path="/budget-summary"
           element={
@@ -98,7 +101,7 @@ export default function App() {
           path="/transaction-list"
           element={<TransactionList transactions={transactions} />}
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
         <Route path="/register" element={<Register />} />
       </Routes>
     </>
